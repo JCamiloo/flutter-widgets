@@ -18,12 +18,12 @@ class HomePage extends StatelessWidget {
       future: menuProvider.loadData(),
       initialData: [],
       builder: (context, AsyncSnapshot<List<dynamic>> snapshot){
-        return ListView(children: _itemList(snapshot.data));
+        return ListView(children: _itemList(snapshot.data, context));
       },
     );
   }
 
-  List<Widget>_itemList(List<dynamic> data) {
+  List<Widget>_itemList(List<dynamic> data, BuildContext context) {
     final List<Widget> options = [];
 
     data.forEach((opt) {
@@ -31,7 +31,9 @@ class HomePage extends StatelessWidget {
         title: Text(opt['text']),
         leading: getIcon(opt['icon']),
         trailing: Icon(Icons.arrow_forward_ios, color: Colors.blue),
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, opt['route']);
+        },
       );
       
       options..add(widgetTemp)..add(Divider(height: 0.0,));
