@@ -8,7 +8,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Components')),
+      appBar: AppBar(title: Text('Widgets')),
       body: _list(),
     );
   }

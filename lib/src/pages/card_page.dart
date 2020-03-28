@@ -10,7 +10,7 @@ class CardPage extends StatelessWidget {
         appBar: AppBar(title: Text('Card Page')),
         body: ListView(
           padding: EdgeInsets.all(10.0),
-          children: <Widget>[_cardClass1()],
+          children: <Widget>[_cardClass1(), _cardClass2()],
         ),
       ),
     );
@@ -39,6 +39,26 @@ class CardPage extends StatelessWidget {
             ],
           )
         ]
+      ),
+    );
+  }
+
+  Widget _cardClass2() {
+    return Card(
+      child: Column(
+        children: <Widget>[
+          FadeInImage(
+            image: NetworkImage('https://miro.medium.com/max/2000/0*QNdQhs_T3ffa6B0m.jpeg'),
+            placeholder: AssetImage('assets/loading.gif'),
+            fadeInDuration: Duration(milliseconds: 200),
+            height: 300.0,
+            fit: BoxFit.cover
+          ),
+          Container(
+            padding: EdgeInsets.all(10.0),
+            child: Text('Some irrelevant text'),
+          )
+        ],
       ),
     );
   }
