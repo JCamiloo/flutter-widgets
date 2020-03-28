@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class CardPage extends StatelessWidget {
-  const CardPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +9,7 @@ class CardPage extends StatelessWidget {
         appBar: AppBar(title: Text('Card Page')),
         body: ListView(
           padding: EdgeInsets.all(10.0),
-          children: <Widget>[_cardClass1(), _cardClass2()],
+          children: <Widget>[_cardClass1(), SizedBox(height: 15.0), _cardClass2()],
         ),
       ),
     );
@@ -18,6 +17,8 @@ class CardPage extends StatelessWidget {
 
   Widget _cardClass1() {
     return Card(
+      elevation: 10.0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       child: Column(
         children: <Widget>[
           ListTile(
@@ -29,7 +30,7 @@ class CardPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               FlatButton(
-                child: Text('Cancelar'),
+                child: Text('Cancel'),
                 onPressed: () {},
               ),
               FlatButton(
@@ -44,7 +45,7 @@ class CardPage extends StatelessWidget {
   }
 
   Widget _cardClass2() {
-    return Card(
+    final card = Container(
       child: Column(
         children: <Widget>[
           FadeInImage(
@@ -59,6 +60,25 @@ class CardPage extends StatelessWidget {
             child: Text('Some irrelevant text'),
           )
         ],
+      ),
+    );
+
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30.0),
+        color: Colors.white,
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 15.0,
+            spreadRadius: 2.0,
+            offset: Offset(2.0, 10.0)
+          )
+        ]
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(30.0),
+        child: card,
       ),
     );
   }
