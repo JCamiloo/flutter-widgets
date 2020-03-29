@@ -11,6 +11,8 @@ class _InputPageState extends State<InputPage> {
   String _name = '';
   String _date = '';
   TextEditingController _inputFieldDateCtlr = new TextEditingController();
+  String _selectedOption = 'Option 1';
+  List<String> _options = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,9 @@ class _InputPageState extends State<InputPage> {
             Divider(),
             _createPassword(),
             Divider(),
-            _createDate(context)
+            _createDate(context),
+            Divider(),
+            _createDropdown()
           ],
         ),
       ),
@@ -119,5 +123,35 @@ class _InputPageState extends State<InputPage> {
         _inputFieldDateCtlr.text = _date;
       });
     } 
+  }
+
+  Widget _createDropdown() {
+    return Row(
+      children: <Widget>[
+        Icon(Icons.select_all, color: Colors.grey),
+        SizedBox(width: 20.0,),
+        Expanded(
+          child: DropdownButton(
+            value: _selectedOption,
+            items: getDropdownOptions(),
+            onChanged: (opt) {
+              setState(() => _selectedOption = opt);
+            }
+          ),
+        ),
+      ],
+    );
+  }
+
+  List<DropdownMenuItem<String>> getDropdownOptions() {
+    List<DropdownMenuItem<String>> list = new List();
+    _options.forEach((option) {
+      list.add(DropdownMenuItem(
+        child: Text(option),
+        value: option
+      ));
+    });
+
+    return list;
   }
 }
