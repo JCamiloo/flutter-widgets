@@ -39,20 +39,32 @@ class _ListViewPageState extends State<ListViewPage> {
   }
 
   Widget _createList() {
-    return ListView.builder(
-      padding: EdgeInsets.all(0.0),
-      controller: _scrollCtrl,
-      itemCount: _numbersList.length,
-      itemBuilder: (BuildContext context, int index) {
-        final image = _numbersList[index];
-        return FadeInImage(
-          image: NetworkImage('https://picsum.photos/500/300/?image=$image'),
-          placeholder: AssetImage('assets/loading.gif'),
-          height: 300,
-          fit: BoxFit.cover,
-        );
-      },
+    return RefreshIndicator(
+      onRefresh: _resetPages,
+      child: ListView.builder(
+        padding: EdgeInsets.all(0.0),
+        controller: _scrollCtrl,
+        itemCount: _numbersList.length,
+        itemBuilder: (BuildContext context, int index) {
+          final image = _numbersList[index];
+          return FadeInImage(
+            image: NetworkImage('https://picsum.photos/500/300/?image=$image'),
+            placeholder: AssetImage('assets/loading.gif'),
+            height: 300,
+            fit: BoxFit.cover,
+          );
+        }
+      ),
     );
+  }
+
+  Future<Null> _resetPages() async {
+    final duration = new Duration(seconds: 2);
+    new Timer(duration, () {
+      _numbersList = [_numbersList[_numbersList.length - 1]++];
+      _addImages();
+    }); 
+    return Future.delayed(duration);
   }
 
   void _addImages() {
